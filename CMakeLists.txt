@@ -44,9 +44,6 @@ target_compile_definitions(lib PRIVATE ${SHAPELY_MACROS})
 target_include_directories(lib PRIVATE src ${Python3_NumPy_INCLUDE_DIRS})
 target_link_libraries(lib PRIVATE GEOS::geos_c)
 install(TARGETS lib DESTINATION shapely)
-if(WIN32)
-    install(FILES $<TARGET_FILE:GEOS::geos> $<TARGET_FILE:GEOS::geos_c> DESTINATION shapely)
-endif()
 
 # shapely._geos — Cython wrapper for GEOS context handle
 add_custom_command(

@@ -1,7 +1,9 @@
+import os
 import sys
 
 from conan import ConanFile
 from conan.tools.cmake import CMake, CMakeDeps, CMakeToolchain, cmake_layout
+from conan.tools.files import copy
 
 
 class ShapelyConan(ConanFile):
@@ -32,3 +34,7 @@ class ShapelyConan(ConanFile):
     def package(self):
         cmake = CMake(self)
         cmake.install()
+        if self.settings.os == "Windows":
+            geos_folder = self.dependencies["geos"].package_folder
+            copy(self, "*.dll", src=os.path.join(geos_folder, "bin"),
+                 dst=os.path.join(self.package_folder, "shapely"))
