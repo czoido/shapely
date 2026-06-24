@@ -91,7 +91,7 @@ jobs:
           CIBW_SKIP: "pp* *_i686 *_ppc64le *_s390x"
           CIBW_CONFIG_SETTINGS: ${{ matrix.host_profile && format('host-profile={0}', matrix.host_profile) || '' }}
           CIBW_BEFORE_BUILD_WINDOWS: pip install delvewheel
-          CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: delvewheel repair -w {dest_dir} {wheel}
+          CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: delvewheel repair -w {dest_dir} {wheel} --add-path {project}\build\.conan-libs
           CIBW_TEST_REQUIRES: pytest
           CIBW_TEST_COMMAND: pytest --pyargs shapely.tests
 
